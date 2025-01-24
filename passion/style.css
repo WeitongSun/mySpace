@@ -1,0 +1,12 @@
+
+body{
+    background-color: rgb(118, 71, 227);
+
+}
+p{
+    color: rgb(99, 215, 99); 
+    background-color: rgb(199, 28, 28);
+    border: 10px dashed yellow;
+    padding: 50px;
+    text-align: center;
+}
