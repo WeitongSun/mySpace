@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ideal Home</title>
+    <style>
+        /* 让 body 占满整个视口并居中内容 */
+        body {
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            background-color: #f0f0f0; /* 可选的背景色 */
+        }
+
+        /* 确保 div 也是 flex 容器，便于调整内部元素 */
+        .seat {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .doc{
+            position: fixed;
+            max-width: 1%;
+            top: 200px;
+            left: 250px;
+            cursor: pointer;
+            
+        }
+        .folder{
+            position: fixed;
+            max-width: 1%;
+            top: 100px;
+            right: 350px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="seat">
+        <a href="story/index.html">
+            <img src="story/img/seat.png" alt="airplane seat">
+        </a>
+    </div>
+
+    <div class="doc"><a href="https://docs.google.com/document/d/16oDrxzJsr-IFnJa0nX2LINoiXm2ucqv3Tr-rp4twrwU/edit?usp=sharing">
+            <img src="3d-document.png" alt="doc" width="60px">
+        </a>
+    </div>
+
+    <div class="folder"><a href="https://docs.google.com/document/d/1lZAZ8Vdr6tVD9i7Z8uo0WpiORN0MMVSnsm9lDkPdJGw/edit?usp=sharing">
+        <img src="3d-folder.png" alt="doc" width="60px">
+    </a>
+</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poem Display</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* 让整个页面高度填充视口 */
+            margin: 0;
+            background-color: #f5f5f5; /* 轻柔背景色 */
+            font-family: "Georgia", serif;
+            cursor: pointer; /* 让鼠标指针变成可点击 */
+        }
+        .poem-container {
+            text-align: center; /* 让文本居中 */
+            max-width: 600px; /* 控制文本宽度 */
+            line-height: 1.8; /* 增加行间距 */
+            font-size: 20px; /* 适中的字体大小 */
+            color: #333; /* 柔和的黑色文本 */
+        }
+    </style>
+</head>
+<body onclick="goToNextPage()">
+
+    <div class="poem-container">
+        <p>I feel like a fish sometimes<br>
+        Swimming along the ceiling in flowing rooms<br>
+        Walls shimmering with ripples<br>
+        Where reality never reveals</p>
+
+        <p>My parents want me to be a tiger<br>
+        Living in mountains full of woods<br>
+        Borned in a tiger year <br>
+        They added 山mountain and 木wood to my name</p>
+
+        <p>I am secretly a tiger<br>
+        Constantly seeking for my own territory<br>
+        Never fulfilled <br>
+        Never free</p>
+
+        <p>I wish I can be nothing<br>
+        Then I can be free from <br>
+        searching for home</p>
+    </div>
+
+    <script>
+        function goToNextPage() {
+            window.location.href = "/index.html";
+            // 修改为你的目标页面路径
+        }
+    </script>
+
+</body>
+</html>

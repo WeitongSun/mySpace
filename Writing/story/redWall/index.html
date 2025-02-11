@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="redWall" id="redWall">
+        <img src="img/redWall.jpg" alt="Chinese Red Wall">
+        <div class="chi"><img src="img/chizi.png" alt="chizi"></div>
+    </div>
+
+    <div class="dialogue-box" id="dialogue">
+        <p class="red-text" id="redWallText"></p>
+        <p class="yellow-text" id="userText"></p>
+        <div id="options"></div>
+    </div>
+
+    <script>
+        const dialogueBox = document.getElementById("dialogue");
+        const redWallText = document.getElementById("redWallText");
+        const userText = document.getElementById("userText");
+        const optionsDiv = document.getElementById("options");
+        const redWall = document.getElementById("redWall");
+
+        const dialogues = {
+            start: {
+                red: "你在测绘幸福的建筑范式？Are you mapping the architectural paradigm of happiness?",
+                options: [
+                    { text: "我在找与政治宣传的色差值I am looking for the color difference values related to political propaganda.", next: "path1" },
+                    { text: "等等！墙在呼吸？Wait! Is the wall breathing?", next: "path2" }
+                ]
+            },
+            path1: {
+                user: "这些氧化铁颜料的RGB数值比政府宣传片的#FF0033有些许差别The RGB values of these iron oxide pigments are slightly different from the #FF0033 used in government propaganda films.",
+                red: "你们这代人总想拆解记忆的像素点Your generation is always trying to deconstruct the pixels of memory.",
+                next: "path1_cont",
+                options: null
+            },
+            path1_cont: {
+                red: "知道为什么红色涂料总比革命口号早褪色三年吗？Do you know why red paint always fades three years earlier than revolutionary slogans?",
+                user: "因为意识形态会篡改记忆。。。这是我第几次要去异乡了？Because ideology rewrites memory... How many times have I left for a foreign land?",
+                next: "end",
+                options: null
+            },
+            path2: {
+                red: "你终于摸到时间的鳃了，告诉我，你还听见了什么？You've finally touched the gills of time.  Tell me, what else have you heard?",
+                user: "我听见...泉水流过拆迁指挥部的声音？它们要拆掉我的儿时记忆。I hear... the sound of spring water flowing past the demolition command center?  They are tearing down my childhood memories.",
+                next: "path2_cont",
+                options: null
+            },
+            path2_cont: {
+                red: "进来吧，看看呼吸的本质，那些被你们称作'乡愁'的，不过是文化的纤维化。1998年你出生时的啼哭，2016年绿皮火车的汽笛都储存在这面墙里。Come in, take a look at the essence of breathing.  What you call *nostalgia* is nothing more than the fibrotic remains of culture.  The cry of your birth in 1998, the whistle of the green train in 2016— they are all stored within this wall.",
+                user: "绿皮火车。。。那已经是八年前我第一次离开故土时了The green train... That was eight years ago, the first time I left my homeland.",
+                next: "end",
+                options: null
+            },
+            end: {
+                red: "……",
+                next: null,
+                options: null
+            }
+        };
+
+        let currentStep = null;
+
+        function startDialogue() {
+            showDialogue("start");
+        }
+
+        function showDialogue(step) {
+            currentStep = step;
+            const dialogue = dialogues[step];
+
+            redWallText.innerText = dialogue.red || "";
+            userText.innerText = dialogue.user || "";
+            optionsDiv.innerHTML = "";
+
+            if (dialogue.options) {
+                dialogue.options.forEach(option => {
+                    const btn = document.createElement("div");
+                    btn.classList.add("option");
+                    btn.innerText = option.text;
+                    btn.onclick = () => showDialogue(option.next);
+                    optionsDiv.appendChild(btn);
+                });
+            } else if (dialogue.next) {
+                setTimeout(() => showDialogue(dialogue.next), 6000);
+            } else if (step === "end") {
+                setTimeout(triggerWallAnimation, 4000);
+            }
+        }
+
+        function triggerWallAnimation() {
+            redWall.style.transform = "scale(1.5)"; // 增大墙的尺寸
+            redWall.addEventListener("click", () => {
+                window.location.pathname = "./story/redWall/train/index.html"; // 点击后跳转到下一个网页
+            });
+        }
+
+        document.querySelector(".chi img").addEventListener("click", () => {
+            dialogueBox.style.display = "flex";
+            startDialogue();
+        });
+
+        document.querySelectorAll("div img").forEach((img, index) => {
+            img.style.animationDelay = `${Math.random() * 1.5}s`;
+        });
+    </script>
+    
+
+</body>
+</html>

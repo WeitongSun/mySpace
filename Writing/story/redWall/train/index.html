@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floating Images with Hover Text</title>
+    <style>
+        body {
+            overflow: hidden;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .free {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 3s ease-in-out;
+            cursor: pointer;
+            bottom: 100px;
+        }
+        .train {
+            position: absolute;
+            bottom: 20px;
+        }
+        .floating {
+            position: absolute;
+            width: 100px;
+            animation: floatAnim 5s infinite alternate ease-in-out;
+        }
+        /* 提示文本样式 */
+        .hover-text {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 14px;
+            white-space: nowrap;
+            display: none;
+            transition: opacity 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="free">
+        <img src="img/liberty.png" alt="liberty" class="hover-target" data-text="检测到危险集体主义倾向，请解释记忆样本中反复出现的'红墙'意象。Dangerous collectivist tendencies detected. Please explain the recurring ‘red wall’ imagery in the memory samples.">
+        <div class="train"><a href="poem.html"><img src="img/train.jpg" alt="train" class="hover-target" width="600px" data-text="记住——所有抵达都是螺旋上升的告别 Remember—every arrival is a spiraling farewell."></a></div>
+    </div>
+
+    <div><img src="img/fish.jpg" alt="fish" class="floating hover-target" data-text="自由是上帝打喷嚏溅落的头皮屑 Freedom is the dandruff that falls when God sneezes."></div>
+    <div><img src="img/qingwa.jpg" alt="qingwa" class="floating hover-target" data-text="愤怒是唯一合法的致幻剂 Anger is the only legal hallucinogen."></div>
+    <div><img src="img/quan.jpg" alt="quan" class="floating hover-target" data-text="异域的风试图用政治正确覆盖你的中庸之道，但泉水永远在底层运行。The foreign winds attempt to cloak your doctrine of moderation with political correctness, but the spring water always flows beneath."></div>
+    <div><img src="img/zhu.jpg" alt="zhu" class="floating hover-target" data-text="过犹不及Too much is as bad as too little."></div>
+    <div><img src="img/cat.jpg" alt="cat" class="floating hover-target" data-text="所有对自由的朝圣，终将坍缩成对大明湖畔一只橘猫的思念All pilgrimages to freedom will eventually collapse into the longing for an orange cat by the shores of Daming Lake."></div>
+    <div><img src="img/t.jpg" alt="t" class="floating hover-target" data-text="T：……"></div>
+    <div><img src="img/moon.jpg" alt="moon" class="floating hover-target" data-text="月亮是人类最古老的时间单位 The moon is humanity’s oldest unit of time."></div>
+    <div><img src="img/tree.jpg" alt="tree" class="floating hover-target" data-text="树的年轮里藏着无法言说的过去 The tree’s rings hold an unspeakable past."></div>
+    <div><img src="img/wall.jpg" alt="wall" class="floating hover-target" data-text="幸福建筑的本质是创伤的拓扑展开。The essence of architecture for happiness is the topological unfolding of trauma."></div>
+
+    <div id="tooltip" class="hover-text"></div>
+
+    <script>
+        const floatingImages = document.querySelectorAll(".floating");
+        const hoverTargets = document.querySelectorAll(".hover-target");
+        const tooltip = document.getElementById("tooltip");
+
+        let hideTooltipTimeout; // 记录隐藏文本的计时器
+
+        // 让所有 "floating" 图片随机漂浮
+        floatingImages.forEach(img => {
+            const x = Math.random() * window.innerWidth * 0.8;
+            const y = Math.random() * window.innerHeight * 0.8;
+            img.style.left = `${x}px`;
+            img.style.top = `${y}px`;
+
+            const duration = 4 + Math.random() * 3;
+            img.style.animationDuration = `${duration}s`;
+
+            img.animate([
+                { transform: `translate(0px, 0px)` },
+                { transform: `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px)` }
+            ], {
+                duration: duration * 1000,
+                iterations: Infinity,
+                direction: "alternate",
+                easing: "ease-in-out"
+            });
+        });
+
+        // 悬停显示文本，并延迟隐藏
+        hoverTargets.forEach(img => {
+            img.addEventListener("mouseenter", (event) => {
+                clearTimeout(hideTooltipTimeout); // 取消之前的隐藏计时
+                tooltip.innerText = img.getAttribute("data-text");
+                tooltip.style.display = "block";
+                tooltip.style.opacity = "1";
+                tooltip.style.left = `${event.pageX + 10}px`;
+                tooltip.style.top = `${event.pageY + 10}px`;
+            });
+
+            img.addEventListener("mousemove", (event) => {
+                tooltip.style.left = `${event.pageX + 10}px`;
+                tooltip.style.top = `${event.pageY + 10}px`;
+            });
+
+            img.addEventListener("mouseleave", () => {
+                hideTooltipTimeout = setTimeout(() => {
+                    tooltip.style.opacity = "0";
+                    setTimeout(() => {
+                        tooltip.style.display = "none";
+                    }, 500); // 0.5秒后隐藏
+                }, 2000); // 2秒后隐藏
+            });
+        });
+    </script>
+
+</body>
+</html>

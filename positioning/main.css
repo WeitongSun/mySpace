@@ -1,0 +1,101 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    background-color: lightsteelblue;
+}
+img{
+    max-width: 100%;
+}
+
+.block{
+    background-color: lightpink;
+    border: 1px solid;
+    padding: 10px;
+    margin: 10px;
+}
+
+.container{
+   background-color: lightgoldenrodyellow;
+   border: 1px solid;
+   padding: 20px;
+   margin: 10px;
+}
+.inline{
+    background-color: lightgreen;
+    border: 1px solid;
+    /* inline elements don';t work well with padding, margin, width, or height */
+}
+.inline-block{
+    display:inline-block;
+    background-color: lightgray;
+    border: 1px solid;
+    padding: 30px;
+    margin: 10px;
+    width: 100px;
+    height: 100px;
+    
+}
+
+.content-box{
+    background-color: lightcyan;
+    border: 5px dashed blue;
+    padding: 50px;
+    margin: 50px;
+    width: 200px;
+    height: 200px;
+    box-sizing: content-box;
+}
+.border-box{
+    background-color: lightcyan;
+    border: 5px dashed blue;
+    padding: 50px;
+    margin: 50px;
+    width: 200px;
+    height: 200px;
+    box-sizing: border-box;
+}
+
+.smiley{
+    background-color: gold;
+    border: 1px solid black;
+    padding: 10px;
+    width: 200px;
+    height: 200px;
+    position: relative;
+    /* move from top */
+    top: 20px;
+    /* move from left */
+    left: 50px;
+    
+}
+
+.smile{
+    background-color: red;
+    border: 1px solid;
+    /* in order for absolute position to work, it needs to be contained in anoyther positioned element */
+    position: absolute;
+    width: 100px;
+    height: 30px;
+    top: 0;
+    right: 0;
+}
+
+.fixed{
+    background-color: lightseagreen;
+    border: 1px solid black;
+    padding: 20px;
+    position:fixed;
+    /* move from top */
+    top: 0;
+    right: 0;
+}
+
+.sticky{
+    background-color: lightgreen;
+    border: 1px solid;
+    padding: 20px;
+    position: sticky;
+    top: 10px;
+}
+

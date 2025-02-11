@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+    <div class="seat"><img src="img/seat.png" alt="airplane seat">
+        <div id="ticket"><img src="img/boardingPass.png" alt="airplane ticket"></div>
+        <div class="left">
+            <img src="img/MuSongLeft.png" alt="left" id="triggerImage">
+        </div>
+        <!-- Container where text will appear -->
+            <div id="text-container"><span id="typewriter-text"></span></div>    
+    </div>
+
+    <div class="ai-text"><p>AI系统（电子音）： 检测到非结构化记忆体——</p></div>
+
+    <!-- 烟雾遮盖 -->
+    <div id="smoke-overlay"><img src="img/fog1.jpg" alt="fog1"></div>
+
+    <!-- AI异常提示 -->
+    <div id="ai-warning"><a href="redWall/index.html">检测到非结构化记忆体—— Unstructured memory detected——</a></div>
+
+
+    <script>
+        const image = document.getElementById('ticket');
+        
+        image.addEventListener('click', function() {
+            this.classList.toggle('zoomed');
+        });
+
+        document.getElementById("triggerImage").addEventListener("click", function() {
+            let text = "我记得上一次拿起《目送》时，是在飞往美国的飞机上。那年我18岁，我带上降噪耳机，将周遭割裂。客舱是充满雾的空间。前方本就是雾，后面却也渐渐烟雾弥漫。所存在的就只是我狭隘的个体。我的过去本该绵延到此刻推向未来，但我站在这个节点却忘记了所有原因。I picked up Musong again while on a flight to the United States. I was 18 years old, wearing noise-canceling headphones, isolating myself from the surroundings. The cabin was filled with mist. The front was already foggy, and gradually, smoke filled the rear. All that existed was my narrow self. My past should have continued to this moment, pushing towards the future, but standing at this juncture, I feel severed from my past.";
+            let index = 0;
+            let container = document.getElementById("typewriter-text");
+
+            if (!container) {
+                console.error("Element #typewriter-text not found!");
+                return;
+            }
+
+            container.textContent = ""; // Clear previous text
+
+            function typeWriter() {
+                if (index < text.length) {
+                    container.textContent += text.charAt(index);
+                    index++;
+                    setTimeout(typeWriter, 50); // 调整速度
+                } else {
+                    // 文字显示完后，等待6秒然后消失
+                    setTimeout(() => {
+                        container.textContent = "";
+                        document.querySelector(".ai-text").style.display = "none";
+
+                        // 逐渐显示烟雾
+                        let smokeOverlay = document.getElementById("smoke-overlay");
+                        smokeOverlay.style.opacity = "1";
+
+                        // 5秒后显示AI异常提示
+                        setTimeout(() => {
+                            let aiWarning = document.getElementById("ai-warning");
+                            aiWarning.style.opacity = "1";
+                        }, 5000);
+                    }, 6000);
+                }
+            }
+
+            typeWriter(); // Start typing effect
+        });
+
+        document.querySelectorAll("div img").forEach((img, index) => {
+        img.style.animationDelay = `${Math.random() * 1.5}s`;
+        });
+    </script>
+
+</body>
+</html>

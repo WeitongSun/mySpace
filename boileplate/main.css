@@ -1,0 +1,9 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    background-color: deepskyblue;
+}
+img{
+    max-width: 100%;
+}

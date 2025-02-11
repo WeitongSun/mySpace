@@ -1,0 +1,39 @@
+body{
+    background-color: rgb(233, 246, 251);
+}
+img{
+    max-width: 100%;
+}
+
+/* external styles are the least specific application */
+div{
+    margin: 20px;
+    background-color: rgb(195, 238, 67);
+    padding: 10px;
+    text-align: center;
+}
+/* default tags are the least specific */
+main{
+    margin: 20px;
+    background-color: lightpink;
+    padding: 10px;
+    text-align: center;
+}
+/* class > default tags */
+.class{
+    background-color: lightgoldenrodyellow;
+}
+#id{
+    background-color: lightseagreen;
+}
+
+footer{
+    margin: 20px;
+    background-color: lightpink;
+    padding: 10px;
+    text-align: center;
+}
+/* styles declared lower in the css document are more specific */
+footer{
+    background-color: lightskyblue;
+}
