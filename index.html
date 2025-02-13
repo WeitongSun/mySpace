@@ -7,11 +7,139 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <h1>My Space</h1>
-    <p>Projects:</p>
-    <ul>
-        <li><a href="1/index.html">first website</a></li>
-        <li><a href="Writing/index.html">passion</a></li>
-    </ul>
+    <div class="nav">
+        <a href="#" id="reloadBtn">
+          <img src="img/logo.png" width="50px">
+        </a>
+      </div>
+
+
+<!-- 修改后的HTML结构示例 -->
+<div class="icon-container">
+    <div class="icon">
+        <a href="1/index.html">
+            <img src="img/3d-document.png" alt="Document" width="100px">
+            <span>first website</span>
+        </a>
+    </div>
+    
+    <div class="icon">
+        <a href="Writing/index.html">
+            <img src="img/seat.png" alt="Seat" width="120px">
+            <span>passion</span>
+        </a>
+    </div>
+</div>
+  
+  <script>
+  // 拖拽功能实现
+  document.addEventListener('DOMContentLoaded', () => {
+    const icons = document.querySelectorAll('.icon');
+    
+    // 初始化随机位置
+    icons.forEach((icon, index) => {
+      // 尝试读取保存的位置
+      const savedPos = localStorage.getItem(`iconPos-${index}`);
+      if (!savedPos) {
+        // 生成随机位置
+        const randomX = Math.random() * (window.innerWidth - 200);
+        const randomY = Math.random() * (window.innerHeight - 100);
+        Object.assign(icon.style, {
+          left: `${randomX}px`,
+          top: `${randomY}px`
+        });
+      } else {
+        // 应用保存的位置
+        const { x, y } = JSON.parse(savedPos);
+        Object.assign(icon.style, {
+          left: `${x}px`,
+          top: `${y}px`
+        });
+      }
+  
+      // 拖拽逻辑
+      let isDragging = false;
+      let offsetX, offsetY;
+  
+      icon.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        
+        // 计算鼠标相对元素的位置
+        const rect = icon.getBoundingClientRect();
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
+        
+        icon.style.transition = 'none'; // 拖拽时禁用动画
+      });
+  
+      document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        
+        // 计算新位置
+        const newX = e.clientX - offsetX;
+        const newY = e.clientY - offsetY;
+        
+        // 限制在视口范围内
+        const boundedX = Math.max(0, Math.min(newX, window.innerWidth - icon.offsetWidth));
+        const boundedY = Math.max(0, Math.min(newY, window.innerHeight - icon.offsetHeight));
+        
+        Object.assign(icon.style, {
+          left: `${boundedX}px`,
+          top: `${boundedY}px`
+        });
+      });
+  
+      document.addEventListener('mouseup', () => {
+        if (isDragging) {
+          isDragging = false;
+          icon.style.transition = '0.3s';
+          
+          // 保存位置到本地存储
+          const index = Array.from(icons).indexOf(icon);
+          localStorage.setItem(`iconPos-${index}`, JSON.stringify({
+            x: parseInt(icon.style.left),
+            y: parseInt(icon.style.top)
+          }));
+        }
+      });
+    });
+  
+    // 窗口大小变化时保持位置比例
+    window.addEventListener('resize', () => {
+      icons.forEach((icon, index) => {
+        const savedPos = localStorage.getItem(`iconPos-${index}`);
+        if (savedPos) {
+          const { x, y } = JSON.parse(savedPos);
+          Object.assign(icon.style, {
+            left: `${(x / window.innerWidth) * 100}%`,
+            top: `${(y / window.innerHeight) * 100}%`
+          });
+        }
+      });
+    });
+  });
+
+  // 新增点击处理逻辑
+document.getElementById('reloadBtn').addEventListener('click', function(e) {
+  e.preventDefault(); // 阻止默认跳转行为
+  
+  // 清除所有图标位置存储
+  Object.keys(localStorage).forEach(key => {
+    if (key.startsWith('iconPos-')) {
+      localStorage.removeItem(key);
+    }
+  });
+
+  // 强制刷新页面
+  window.location.reload(true);
+});
+
+// 保持原有初始化代码不变
+document.addEventListener('DOMContentLoaded', () => {
+  // 原有图标位置初始化代码...
+});
+  </script>
+
+
 </body>
 </html>

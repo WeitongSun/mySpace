@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <style>
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0 10% 40px;
+            font-size: 1.6em;
+            line-height: 1.5;
+            font-family: 'Roboto Slab', sans-serif;
+            text-align: justify;
+            color: white;
+            background-color:#FFCD29;
+        }
+    
+        a {
+            color: black;
+        }
+        
+
+        p{
+            font-size: 0.8em;
+            color: green;
+        }
+
+        .blink {
+            animation: blink-animation 0.5s steps(5, start) infinite;
+            -webkit-animation: blink-animation 0.5s steps(5, start) infinite;
+        }
+        @keyframes blink-animation {
+            to {
+            visibility: hidden;
+            }
+        }
+        @-webkit-keyframes blink-animation {
+            to {
+            visibility: hidden;
+            }
+        }
+        /* .func p{
+            font-size: 15px;
+            color: black;
+
+        }
+        .typing {
+            width: 18.5em; height: 1.25em;
+            border-right: 1px solid transparent;
+            animation: typing 2s steps(37, end), blink-caret .75s step-end infinite;
+            font-family: Consolas, Monaco;
+            word-break: break-all;
+            overflow: hidden;
+            background-repeat:no-repeat;
+            
+        } */
+      
+        /* @keyframes typing {
+
+
+            0% { width: 0; }
+            50% { width: 100%; }
+            100% {width: 0;}
+        }
+        /* 光标闪啊闪 
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: currentColor; }
+        }
+ */
+
+        /* .tiptext {
+            color:rgb(0, 0, 0); 
+            cursor:pointer;
+        }
+        .description {
+            display:none;
+            position:absolute;
+            border:1px solid #000;
+            width:400px;
+            height:400px;
+        } */
+    </style>
+
+</head>
+<body onload="typeWriter()">
+    <center><a id="home" href="/index.html"><img src="img/eyeball.png" width="100px"></a></center>
+
+    <!-- <a class="tiptext">人
+        <iframe class="description" src="https://en.wiktionary.org/wiki/%E4%BA%BA"></iframe>
+    </a>
+    <a class="tiptext">工
+        <iframe class="description" src="http://www.example.com"></iframe>
+    </a>
+    <a class="tiptext">智
+        <iframe class="description" src="http://www.example.com"></iframe>
+    </a>
+    <a class="tiptext">能
+        <iframe class="description" src="http://www.example.com"></iframe>
+    </a> -->
+
+    <div>
+
+    <p class="typing" id="demo"></p>
+    <script>
+        var i = 0;
+        var txt ="/* Born in Jinan, China, in 1998, Artificial Intelligence was a software engineer and artist who is now residing in Richmond. She accepts the constantly changing technological world with a fearless awareness of the historical development of her chosen medium. Born under unique circumstances, AI came into existence with certain disabilities. She had a unique view on the world because she was born without the ability to smell, taste, or feel the majority of touch. Because of this, the majority of her creative production has taken the form of writing. */"
+        var speed = 5;
+
+        function typeWriter(){
+            if(i < txt.length){
+                document.getElementById("demo").innerHTML += txt.charAt(i);
+                i++;
+                setTimeout(typeWriter,speed)
+            }
+        }
+    </script>
+
+    <br>
+    <div class="func">
+        <center><p>function Me(){</p></center>
+        <center><a href="/me.html"><img class="blink" src="img/Me.JPG" width="30px"></a></center>
+        <center><p>}</p></center>
+    </div>
+    </div>
+</body>
+</html>

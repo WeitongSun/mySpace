@@ -14,6 +14,17 @@
             margin: 0; 
             background-color: #f0f0f0; /* 可选的背景色 */
         }
+        .nav {
+            position: fixed; /* 改为固定定位 */
+            top: 0;         /* 贴顶 */
+            left: 0;       /* 贴左 */
+            width: 100%;    /* 占满宽度 */
+            background: white; /* 可选背景色 */
+            padding: 10px 0; /* 添加内间距 */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* 可选阴影 */
+            z-index: 1000;
+            text-align: center; /* 内容居中 */
+        }
 
         /* 确保 div 也是 flex 容器，便于调整内部元素 */
         .seat {
@@ -39,6 +50,12 @@
     </style>
 </head>
 <body>
+    <div class="nav">
+        <a href="../index.html">
+          <img src="logo.png" width="50px">
+        </a>
+      </div>
+
     <div class="seat">
         <a href="story/index.html">
             <img src="story/img/seat.png" alt="airplane seat">
