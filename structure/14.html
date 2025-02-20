@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14</title>
+    <style>
+        body {
+            background-color: white !important;
+            margin: 0;
+        }
+
+        @keyframes matrixFall {
+            0% { top: -100vh; }
+            100% { top: 100vh; }
+        }
+
+        .matrix-column {
+            position: absolute;
+            top: 0;
+            width: 5vw;
+            color: lime;
+            font-family: monospace;
+            font-size: 20px;
+            line-height: 1.5;
+            animation: matrixFall 9s linear 1;
+            opacity: 0.8;
+        }
+
+        .matrix-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 2;
+            background-color: transparent;
+            display: none;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .image-container img {
+            width: 800px;
+            height: auto;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container" id="slide-content">
+        <div class="image-container" id="trigger-button">
+            <img src="../img/w1.png" alt="Trigger Image">
+        </div>
+    </div>
+
+    <div class="matrix-container" id="matrix-animation"></div>
+
+    <script>
+        let isAnimating = false;
+        let matrixColumns = [];
+        let animationIntervals = [];
+
+        function startAnimation() {
+            // 清空旧元素
+            while(matrixColumns.length > 0) {
+                const col = matrixColumns.pop();
+                col.remove();
+            }
+            animationIntervals.forEach(clearInterval);
+            animationIntervals = [];
+
+            // 创建新列
+            for (let i = 0; i < 20; i++) {
+                createMatrixColumn(i * 5);
+            }
+
+            // 显示动画容器
+            document.getElementById('matrix-animation').style.display = 'block';
+            
+            // 10秒后自动跳转
+            setTimeout(() => {
+                window.location.href = '15.html'; // 新增跳转逻辑
+            }, 10000);
+        }
+
+        function createMatrixColumn(leftPosition) {
+            const column = document.createElement('div');
+            column.classList.add('matrix-column');
+            column.style.left = leftPosition + 'vw';
+
+            const chars = Array.from({length: 100}, () => {
+                const p = document.createElement('p');
+                p.textContent = getRandomChar();
+                return p;
+            });
+            
+            column.append(...chars);
+            matrixColumns.push(column);
+            document.getElementById('matrix-animation').appendChild(column);
+
+            const intervalId = setInterval(() => {
+                chars.forEach(p => p.textContent = getRandomChar());
+            }, 100);
+            
+            animationIntervals.push(intervalId);
+        }
+
+        // 简化点击事件（只需触发一次）
+        document.getElementById('trigger-button').addEventListener('click', function() {
+            if (!isAnimating) {
+                isAnimating = true;
+                startAnimation();
+            }
+        });
+
+        const matrixChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        function getRandomChar() {
+            return matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
+        }
+    </script>
+</body>
+</html>

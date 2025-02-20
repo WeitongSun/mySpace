@@ -1,0 +1,27 @@
+* {
+    box-sizing: border-box;
+    }
+    body {
+        background-color: rgb(255, 255, 255);
+        margin: 0 auto;
+        color: #fff;
+        cursor: url("img/cursor.gif"), auto;
+    }
+    
+    .nav {
+        position: sticky;
+        margin: 30px;
+        top: 40px;
+        left: 50%;
+        transform: translateX(-50%);      /* 关键：向左回退自身宽度的一半 */
+        display: inline-block;            /* 关键：让导航宽度由内容决定 */
+        width: auto;                     /* 可选：确保宽度自适应 */
+        z-index: 1000;                   /* 可选：防止被其他元素覆盖 */
+    }
+
+    .image-container {
+        display: flex;
+        justify-content: center; /* 水平居中 */
+        align-items: center;     /* 垂直居中 */
+        min-height: 100vh;       /* 确保容器高度充满整个视口 */
+    }
