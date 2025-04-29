@@ -1,0 +1,497 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Microsoft YaHei', Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #D2B48C, #CD853F);
+    min-height: 100vh;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+#temple-container {
+    width: 100vw;
+    height: 100vh;
+    /* 使用符合佛教主题的渐变色背景 */
+    background: linear-gradient(135deg, #8B4513, #CD853F, #D2B48C);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.8s ease;
+}
+
+#welcome-screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 10;
+    transition: all 0.8s ease;
+}
+
+#welcome-screen h1 {
+    color: #FFD700;
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: float-title 3s infinite ease-in-out;
+}
+
+@keyframes float-title {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.btn-container {
+    display: flex;
+    gap: 2rem;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 1.2rem;
+    background: #B8860B;
+    color: #FFF8DC;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background: #DAA520;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* 许愿界面样式 */
+#wish-screen, #fulfill-screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* 香和火盆区域 */
+#incense-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+#incense-box {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.incense {
+    width: 10px;
+    height: 120px;
+    background: linear-gradient(to bottom, #A0522D, #CD853F);
+    border-radius: 3px;
+    cursor: grab;
+    transition: transform 0.3s;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* 香的顶部红色部分 */
+.incense::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: #B22222;
+    border-radius: 3px 3px 0 0;
+}
+
+/* 添加拖动提示动画 */
+.incense::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    opacity: 0;
+    pointer-events: none;
+    animation: drag-hint 2s infinite;
+    z-index: 3;
+}
+
+@keyframes drag-hint {
+    0%, 100% { opacity: 0; transform: translateY(0); }
+    50% { opacity: 0.5; transform: translateY(-10px); }
+}
+
+.incense:hover {
+    transform: translateY(-5px);
+}
+
+.incense.selected {
+    box-shadow: 0 0 15px #FFD700;
+    transform: scale(1.1);
+    cursor: grabbing;
+}
+
+.incense.burning {
+    background: linear-gradient(to bottom, #bb8855, #ddaa77);
+    position: relative;
+}
+
+.incense.burning::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -5px;
+    width: 20px;
+    height: 25px;
+    background: radial-gradient(#ff7700, transparent 70%);
+    border-radius: 50% 50% 0 0;
+    animation: flame 0.5s infinite alternate;
+    z-index: 2;
+}
+
+@keyframes flame {
+    0% { transform: scale(1); opacity: 0.9; }
+    100% { transform: scale(1.2); opacity: 1; }
+}
+
+#incense-fire {
+    width: 60px;
+    height: 40px;
+    background: linear-gradient(to top, #FF4500, #FFD700);
+    border-radius: 10px 10px 0 0;
+    position: relative;
+    box-shadow: 0 0 20px rgba(255, 102, 0, 0.8);
+    transition: all 0.3s ease;
+}
+
+/* 火盆悬停效果 */
+#incense-fire:hover {
+    box-shadow: 0 0 30px rgba(255, 102, 0, 1);
+}
+
+/* 添加火盆放置指示 */
+#incense-fire.can-drop {
+    box-shadow: 0 0 30px gold;
+    animation: fire-pulse 1s infinite alternate;
+}
+
+@keyframes fire-pulse {
+    0% { box-shadow: 0 0 20px rgba(255, 102, 0, 0.8); }
+    100% { box-shadow: 0 0 30px rgba(255, 215, 0, 1); }
+}
+
+/* 拖动中的香样式 */
+.ui-draggable-dragging {
+    transform: scale(1.2) !important;
+    z-index: 1000 !important;
+}
+
+/* 火盆底座 */
+#incense-fire::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: -10px;
+    width: 80px;
+    height: 20px;
+    background: #825337;
+    border-radius: 5px;
+}
+
+/* 佛像区域 */
+#buddha-area, #buddha-area-fulfill {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#buddha:hover, #buddha-fulfill:hover {
+    filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.9));
+    transform: scale(1.05);
+}
+
+/* 佛像背后的光晕 */
+
+#pray-btn {
+    margin-top: 1rem;
+    background: #B8860B;
+    color: #FFF8DC;
+}
+
+#pray-count {
+    color: #FFF8DC;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* 输入区域 */
+#wish-input-container, #fulfill-input-container {
+    width: 80%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    font-size: 1rem;
+}
+
+.back-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.7);
+    color: #333;
+    padding: 8px 15px;
+    border-radius: 5px;
+    z-index: 20;
+}
+
+/* 漂浮物样式 */
+.floating-wish {
+    position: absolute;
+    background-color: rgba(218, 165, 32, 0.7);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    z-index: 10;
+    animation: float 5s infinite ease-in-out;
+}
+
+/* 不同颜色的漂浮物 */
+.floating-wish:nth-child(3n+1) {
+    background-color: rgba(184, 134, 11, 0.7);
+    box-shadow: 0 0 10px rgba(184, 134, 11, 0.8);
+    animation-delay: 0.3s;
+}
+
+.floating-wish:nth-child(3n+2) {
+    background-color: rgba(205, 133, 63, 0.7);
+    box-shadow: 0 0 10px rgba(205, 133, 63, 0.8);
+    animation-delay: 0.6s;
+}
+
+.floating-wish:nth-child(3n+3) {
+    background-color: rgba(218, 165, 32, 0.7);
+    box-shadow: 0 0 10px rgba(218, 165, 32, 0.8);
+    animation-delay: 0.9s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-10px) rotate(5deg); }
+    50% { transform: translateY(0) rotate(0deg); }
+    75% { transform: translateY(10px) rotate(-5deg); }
+}
+
+#wish-floating-container, #wish-floating-container-fulfill {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    pointer-events: none;
+    z-index: 15;
+}
+
+/* 成功消息样式 */
+.success-message {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 248, 220, 0.9);
+    color: #8B4513;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: none;
+    z-index: 100;
+}
+
+/* 添加云 */
+.cloud {
+    position: absolute;
+    background-color: rgba(255, 248, 220, 0.5);
+    border-radius: 50%;
+    filter: blur(15px);
+    pointer-events: none;
+}
+
+.cloud1 {
+    width: 150px;
+    height: 80px;
+    top: 15%;
+    left: 10%;
+    animation: cloud-drift-1 30s infinite linear;
+}
+
+.cloud2 {
+    width: 100px;
+    height: 60px;
+    top: 25%;
+    right: 15%;
+    animation: cloud-drift-2 25s infinite linear;
+}
+
+.cloud3 {
+    width: 200px;
+    height: 100px;
+    bottom: 20%;
+    left: 20%;
+    animation: cloud-drift-3 35s infinite linear;
+}
+
+@keyframes cloud-drift-1 {
+    0% { left: -15%; }
+    100% { left: 110%; }
+}
+
+@keyframes cloud-drift-2 {
+    0% { right: -10%; }
+    100% { right: 110%; }
+}
+
+@keyframes cloud-drift-3 {
+    0% { left: -20%; }
+    100% { left: 110%; }
+}
+
+/* 光粒子 */
+.light-particle {
+    position: absolute;
+    background-color: rgba(255, 215, 0, 0.3);
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+    pointer-events: none;
+    animation: float-particle 10s infinite ease-in-out;
+}
+
+@keyframes float-particle {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(10px, -10px); }
+    50% { transform: translate(0, -20px); }
+    75% { transform: translate(-10px, -10px); }
+}
+
+/* 声音控制按钮 */
+.sound-toggle {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    #welcome-screen h1 {
+        font-size: 2.5rem;
+        text-align: center;
+        padding: 0 1rem;
+    }
+    
+    .btn-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    #incense-box {
+        gap: 15px;
+    }
+    
+    #wish-input-container, #fulfill-input-container {
+        width: 90%;
+    }
+}
+
+.buddha-fallback {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0.9;
+    display: block;
+    pointer-events: none;
+}
+
+/* 添加额外的本地佛像样式作为兜底方案 */
+#buddha:empty, #buddha-fulfill:empty {
+    background-color: #FFD700;
+    position: relative;
+    border-radius: 50% 50% 40% 40%;
+}
+
+
+
+.buddha-fallback-text {
+    background-color: #FFD700 !important;
+    position: relative;
+    border-radius: 50% 50% 40% 40%;
+}
+
+.buddha-fallback-text::before {
+    content: "佛";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    color: #8B4513;
+    font-weight: bold;
+} 

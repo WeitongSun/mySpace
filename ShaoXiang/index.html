@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>赛博拜佛</title>
+    <link rel="icon" href="https://img.freepik.com/free-vector/golden-buddha-statue-design_1035-8926.jpg" type="image/png">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="temple-container">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="cloud cloud3"></div>
+        
+        <div id="welcome-screen">
+            <h1>欢迎来到赛博佛寺</h1>
+            <div class="btn-container">
+                <button id="make-wish-btn">许愿</button>
+                <button id="fulfill-wish-btn">还愿</button>
+            </div>
+        </div>
+
+        <div id="wish-screen" class="hidden">
+            <div id="light-particles-container"></div>
+            
+            <div id="incense-area">
+                <div id="incense-box">
+                    <div class="incense" id="incense1"></div>
+                    <div class="incense" id="incense2"></div>
+                    <div class="incense" id="incense3"></div>
+                </div>
+                <div id="incense-fire"></div>
+            </div>
+            
+            <div id="buddha-area">
+                <div id="wish-floating-container"></div>
+                <div id="buddha">
+                    <img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.wvErmbV2b1IsZoaOj9SHPwHaHa?w=204&h=204&c=7&r=0&o=5&pid=1.7" alt="佛像" class="buddha-fallback">
+                </div>
+                <button id="pray-btn">拜佛</button>
+                <div id="pray-count">0/3</div>
+            </div>
+            
+            <div id="wish-input-container" class="hidden">
+                <textarea id="wish-text" placeholder="请输入您的愿望..."></textarea>
+                <button id="submit-wish-btn">提交愿望</button>
+            </div>
+            
+            <button id="back-btn" class="back-button">返回</button>
+        </div>
+
+        <div id="fulfill-screen" class="hidden">
+            <div id="light-particles-container-fulfill"></div>
+            
+            <div id="buddha-area-fulfill">
+                <div id="wish-floating-container-fulfill"></div>
+                <div id="buddha-fulfill">
+                    <img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.wvErmbV2b1IsZoaOj9SHPwHaHa?w=204&h=204&c=7&r=0&o=5&pid=1.7" alt="佛像" class="buddha-fallback">
+                </div>
+            </div>
+            
+            <div id="fulfill-input-container">
+                <textarea id="fulfill-text" placeholder="请输入您的还愿内容..."></textarea>
+                <button id="submit-fulfill-btn">提交还愿</button>
+            </div>
+            
+            <button id="back-btn-fulfill" class="back-button">返回</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
