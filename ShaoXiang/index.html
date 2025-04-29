@@ -4,21 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>赛博拜佛</title>
+    <!-- Cyber Temple Worship -->
     <link rel="icon" type="image/png" href="img/logo.png">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="temple-container">
+        <!-- 语言切换按钮 -->
+        <button id="language-toggle" class="language-toggle">English</button>
+
         <div class="cloud cloud1"></div>
         <div class="cloud cloud2"></div>
         <div class="cloud cloud3"></div>
         
         <div id="welcome-screen">
-            <h1>欢迎来到赛博佛寺</h1>
+            <h1 id="title" data-zh="欢迎来到赛博佛寺" data-en="Welcome to the Cyber Temple">欢迎来到赛博佛寺</h1>
             <div class="btn-container">
-                <button id="make-wish-btn">许愿</button>
-                <button id="fulfill-wish-btn">还愿</button>
+                <button id="make-wish-btn" data-zh="许愿" data-en="Make a Wish">许愿</button>
+                <button id="fulfill-wish-btn" data-zh="还愿" data-en="Fulfill a Wish">还愿</button>
             </div>
         </div>
 
@@ -39,16 +43,16 @@
                 <div id="buddha">
                     <img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.wvErmbV2b1IsZoaOj9SHPwHaHa?w=204&h=204&c=7&r=0&o=5&pid=1.7" alt="佛像" class="buddha-fallback">
                 </div>
-                <button id="pray-btn">拜佛</button>
-                <div id="pray-count">0/3</div>
+                <button id="pray-btn" data-zh="拜佛" data-en="Worship Buddha">拜佛</button>
+                <div id="pray-count" data-zh="0/3" data-en="0/3">0/3</div>
             </div>
             
             <div id="wish-input-container" class="hidden">
-                <textarea id="wish-text" placeholder="请输入您的愿望..."></textarea>
-                <button id="submit-wish-btn">提交愿望</button>
+                <textarea id="wish-text" placeholder="请输入您的愿望..." data-zh-placeholder="请输入您的愿望..." data-en-placeholder="Please enter your wish..."></textarea>
+                <button id="submit-wish-btn" data-zh="提交愿望" data-en="Submit Wish">提交愿望</button>
             </div>
             
-            <button id="back-btn" class="back-button">返回</button>
+            <button id="back-btn" class="back-button" data-zh="返回" data-en="Back">返回</button>
         </div>
 
         <div id="fulfill-screen" class="hidden">
@@ -62,11 +66,11 @@
             </div>
             
             <div id="fulfill-input-container">
-                <textarea id="fulfill-text" placeholder="请输入您的还愿内容..."></textarea>
-                <button id="submit-fulfill-btn">提交还愿</button>
+                <textarea id="fulfill-text" placeholder="请输入您的还愿内容..." data-zh-placeholder="请输入您的还愿内容..." data-en-placeholder="Please enter your fulfillment..."></textarea>
+                <button id="submit-fulfill-btn" data-zh="提交还愿" data-en="Submit Fulfillment">提交还愿</button>
             </div>
             
-            <button id="back-btn-fulfill" class="back-button">返回</button>
+            <button id="back-btn-fulfill" class="back-button" data-zh="返回" data-en="Back">返回</button>
         </div>
     </div>
 

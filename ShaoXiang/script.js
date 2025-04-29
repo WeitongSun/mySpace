@@ -880,3 +880,27 @@ $(document).ready(function() {
         `)
         .appendTo('head');
 }); 
+
+// 中英文切换
+let isEnglish = false;
+
+$("#language-toggle").click(function() {
+    isEnglish = !isEnglish;
+
+    // 切换所有有 data-zh 的元素
+    $("*[data-zh]").each(function() {
+        $(this).text(isEnglish ? $(this).attr("data-en") : $(this).attr("data-zh"));
+    });
+
+    // 切换所有 textarea 的 placeholder
+    $("textarea").each(function() {
+        if (isEnglish && $(this).attr("data-en-placeholder")) {
+            $(this).attr("placeholder", $(this).attr("data-en-placeholder"));
+        } else if (!isEnglish && $(this).attr("data-zh-placeholder")) {
+            $(this).attr("placeholder", $(this).attr("data-zh-placeholder"));
+        }
+    });
+
+    // 切换按钮文字
+    $("#language-toggle").text(isEnglish ? "中文" : "English");
+});
